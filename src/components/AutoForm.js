@@ -32,9 +32,9 @@ const Field = ({ field, onChange }) => {
 
   return (
     <>
-      <label>{field.label}</label>
+      <label>{label}</label>
       {(() => {
-        switch (field.type) {
+        switch (attributes.type) {
           case 'textarea':
             return <textarea onChange={onChange} {...attributes} />
           default:
@@ -80,7 +80,7 @@ const AutoForm = ({ form, onSubmit, status }) => {
     onSubmit(formData)
   }
 
-  const { messages } = form.config
+  const { messages, spinner } = form.config
 
   return (
     <form css={AutoFormCSS} onSubmit={handleSubmit}>
@@ -92,7 +92,7 @@ const AutoForm = ({ form, onSubmit, status }) => {
         <button disabled={status === 'success'} type="submit">
           {form.config.buttonText || 'Submit'}
         </button>
-        <Spinner loading={status === 'loading'} />
+        <Spinner loading={status === 'loading' && spinner} />
       </div>
 
       <Message status={status} text={messages[status]} />
@@ -123,6 +123,8 @@ const AutoFormCSS = css`
     display block;
     padding-left: 2px;
     color: #fff;
+    font-weight: 600;
+    letter-spacing: 0.75px;
   }
 
   textarea {
