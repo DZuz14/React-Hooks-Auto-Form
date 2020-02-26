@@ -1,12 +1,12 @@
 export default {
   config: {
     buttonText: 'Send',
-    spinner: true,
     messages: {
       success: 'We received your message! Thanks for inquiring.',
       error:
         'An error occurred during submittal. Please contact us at support@xyz.com'
-    }
+    },
+    spinner: true
   },
   fields: [
     {
@@ -16,7 +16,7 @@ export default {
     },
     {
       label: 'Location',
-      placeholder: 'Boston, MA',
+      placeholder: 'New York, NY',
       required: true
     },
     {
