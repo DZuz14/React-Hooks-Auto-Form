@@ -1,26 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react'
+import AutoForm from './components/AutoForm'
+import form from './forms'
 
-function App() {
+const App = () => {
+  const [status, setStatus] = useState(null)
+
+  const handleSubmit = form => {
+    console.log(form)
+    setStatus('loading')
+
+    setTimeout(() => {
+      setStatus('success')
+      // setStatus('error')
+    }, 3000)
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div
+      style={{
+        padding: '175px 0 0 80px'
+      }}
+    >
+      <h1>GET VIP ACCESS</h1>
+
+      <AutoForm form={form} onSubmit={handleSubmit} status={status} />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
