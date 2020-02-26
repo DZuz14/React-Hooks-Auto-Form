@@ -20,7 +20,7 @@ const App = () => {
   return (
     <div
       style={{
-        padding: '140px 0 0 80px'
+        padding: '125px 0 0 80px'
       }}
     >
       <h1

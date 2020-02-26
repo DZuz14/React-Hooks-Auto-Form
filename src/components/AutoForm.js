@@ -128,7 +128,7 @@ const AutoFormCSS = css`
   }
 
   textarea {
-    height: 100px;
+    height: 125px;
   }
 
   button {
