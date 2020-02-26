@@ -88,20 +88,20 @@ const AutoForm = ({ form, onSubmit, status }) => {
         <Field field={field} onChange={handleChange} />
       ))}
 
-      <div style={{ marginTop: '20px' }}>
+      <div className="form-bottom">
         <button disabled={status === 'success'} type="submit">
           {form.config.buttonText || 'Submit'}
         </button>
-
         <Spinner loading={status === 'loading'} />
-        <Message status={status} text={messages[status]} />
       </div>
+
+      <Message status={status} text={messages[status]} />
     </form>
   )
 }
 
 const AutoFormCSS = css`
-  width: 420px;
+  width: 375px;
   margin-left: 5px;
 
   input, textarea {
@@ -119,7 +119,7 @@ const AutoFormCSS = css`
   }
 
   label {
-    margin-bottom: .5rem;
+    margin-bottom: .65rem;
     display block;
     padding-left: 2px;
     color: #fff;
@@ -135,19 +135,30 @@ const AutoFormCSS = css`
     text-align: center;
     white-space: nowrap;
     vertical-align: middle;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
     user-select: none;
     border: 1px solid transparent;
-    padding: .5rem 1.2rem;
-    font-size: 1.15rem;
+    padding: .55rem 1.5rem;
+    font-size: 1.2rem;
     line-height: 1.5;
     border-radius: .25rem;
     color: #fff;
     background-color: #F10068;
     cursor: pointer;
-    margin-bottom: 1.5rem;
+  }
+
+  button:disabled {
+    background-color: #777;
+  }
+
+  .form-bottom {
+    margin-top: 25px;
+    margin-bottom: 25px;
+    display: flex;
+    align-items: center;
+
+    button {
+      margin-right: 5px;
+    }
   }
 
   .message {
@@ -156,12 +167,6 @@ const AutoFormCSS = css`
     margin-bottom: 1rem;
     border: 1px solid transparent;
     border-radius: .25rem;
-  }
-
-  .message.loading {
-    color: #0c5460;
-    background-color: #d1ecf1;
-    border-color: #bee5eb;
   }
 
   .message.success {
