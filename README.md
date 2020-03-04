@@ -7,7 +7,7 @@ Shows an example of removing almost all of the annoying work that it takes to cr
 
 # Use
 - `git clone https://github.com/DZuz14/react-auto-form.git`
-- `cd react-hooks-auto-form`
+- `cd react-auto-form`
 - `npm i`
 - `npm start`
 
