@@ -1,11 +1,11 @@
 export default {
   config: {
-    buttonText: 'Send',
     messages: {
       success: 'We received your message! Thanks for inquiring.',
       error:
         'An error occurred during submittal. Please contact us at support@xyz.com'
     },
+    buttonText: 'Send',
     spinner: true
   },
   fields: [
