@@ -1,6 +1,5 @@
-/* eslint-disable max-len */
 /** @jsx jsx */
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback, memo, useRef } from 'react'
 import { css, jsx } from '@emotion/core'
 
 /** @function Spinner */
@@ -45,10 +44,14 @@ const Field = ({ field, onChange }) => {
   )
 }
 
+const MemoField = memo(Field)
+
 /**
  * @function AutoForm
  */
 const AutoForm = ({ form, onSubmit, status }) => {
+  const fieldsRef = useRef()
+
   const [fields, setFields] = useState(
     form.fields.map(field => ({
       ...field,
@@ -57,18 +60,33 @@ const AutoForm = ({ form, onSubmit, status }) => {
     }))
   )
 
-  useEffect(() => {
-    if (status === 'success')
-      setFields(fields.map(field => ({ ...field, value: '' })))
-  }, [status])
-
-  const handleChange = e => {
-    const name = e.target.getAttribute('name')
+  const updateFields = (name, value) => {
     const newFields = fields.map(field => {
-      return field.name === name ? { ...field, value: e.target.value } : field
+      return field.name === name ? { ...field, value } : field
     })
     setFields(newFields)
   }
+
+  useEffect(() => {
+    fieldsRef.current = updateFields
+  })
+
+  useEffect(() => {
+    if (status === 'success') {
+      setFields(fields.map(field => ({ ...field, value: '' })))
+    }
+  }, [status])
+
+  const handleChange = useCallback(e => {
+    const name = e.target.getAttribute('name')
+    const value = e.target.value
+
+    const update = () => {
+      fieldsRef.current(name, value)
+    }
+
+    update()
+  }, [])
 
   const handleSubmit = e => {
     e.preventDefault()
@@ -85,7 +103,7 @@ const AutoForm = ({ form, onSubmit, status }) => {
   return (
     <form css={AutoFormCSS} onSubmit={handleSubmit}>
       {fields.map(field => (
-        <Field field={field} onChange={handleChange} />
+        <MemoField key={field.name} field={field} onChange={handleChange} />
       ))}
 
       <div className="form-bottom">
@@ -144,7 +162,7 @@ const AutoFormCSS = css`
     line-height: 1.5;
     border-radius: .25rem;
     color: #fff;
-    background-color: #F10068;
+    background-color: #FD6413;
     cursor: pointer;
   }
 
