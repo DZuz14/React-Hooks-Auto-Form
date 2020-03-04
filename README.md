@@ -6,7 +6,7 @@ Shows an example of removing almost all of the annoying work that it takes to cr
 - useRef
 
 # Use
-- `git clone `
+- `git clone https://github.com/DZuz14/react-hooks-auto-form.git`
 - `cd react-hooks-auto-form`
 - `npm i`
 - `npm start`
