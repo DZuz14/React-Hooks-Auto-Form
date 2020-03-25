@@ -30,7 +30,7 @@ const Field = ({ field, onChange }) => {
   const { label, ...attributes } = field
 
   return (
-    <>
+    <React.Fragment>
       <label>{label}</label>
       {(() => {
         switch (attributes.type) {
@@ -40,7 +40,7 @@ const Field = ({ field, onChange }) => {
             return <input onChange={onChange} {...attributes} />
         }
       })()}
-    </>
+    </React.Fragment>
   )
 }
 
@@ -75,7 +75,7 @@ const AutoForm = ({ form, onSubmit, status }) => {
     if (status === 'success') {
       setFields(fields.map(field => ({ ...field, value: '' })))
     }
-  }, [status])
+  }, [status, fields])
 
   const handleChange = useCallback(e => {
     const name = e.target.getAttribute('name')
